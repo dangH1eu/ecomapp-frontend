@@ -1,5 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserService } from 'src/app/service/user.service';
+import { RegisterDTO } from 'src/app/dto/user/register.dto';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterComponent {
   @ViewChild('registerForm') registerForm!: NgForm;
-  phone: string;
+  phoneNumber: string;
   password: string;
   repeatPassword: string;
   fullName: string;
@@ -16,29 +20,57 @@ export class RegisterComponent {
   isAccepted: boolean;
   dateOfBirth: Date;
 
-  constructor() {
-    this.phone = '';
+  constructor(private router: Router, private userService: UserService) {
+    this.phoneNumber = '';
     this.password = '';
     this.repeatPassword = '';
     this.fullName = '';
     this.address = '';
-    this.isAccepted = false;
+    this.isAccepted = true;
     this.dateOfBirth = new Date();
     this.dateOfBirth.setFullYear(this.dateOfBirth.getFullYear() - 18);
   }
-  onPhoneChange() {
-    console.log(`Phone typed: ${this.phone}`);
+
+  onPhoneNumberChange() {
+    console.log(`Phone typed: ${this.phoneNumber}`);
   }
   register() {
     const message =
-      `phone: ${this.phone}` +
+      `phone: ${this.phoneNumber}` +
       `password: ${this.password}` +
       `repeatPassword: ${this.repeatPassword}` +
       `address: ${this.address}` +
       `fullName: ${this.fullName}` +
       `isAccepted: ${this.isAccepted}` +
       `dateOfBirth: ${this.dateOfBirth}`;
-    alert(message);
+    // alert(message);
+    const registerDTO: RegisterDTO = {
+      fullname: this.fullName,
+      phone_number: this.phoneNumber,
+      address: this.address,
+      password: this.password,
+      repeat_password: this.repeatPassword,
+      date_of_birth: this.dateOfBirth,
+      facebook_account_id: 0,
+      google_account_id: 0,
+      role_id: 1,
+    };
+
+
+    this.userService.register(registerDTO).subscribe({
+      next: (response: any) => {
+        debugger;
+        this.router.navigate(['/login']);
+      },
+      complete: () => {
+        debugger;
+      },
+      error: (error: any) => {
+        alert('cannot register" ${error.error}');
+      },
+    }
+
+    )
   }
   checkPasswordMatch() {
     if (this.password !== this.repeatPassword) {
@@ -56,7 +88,8 @@ export class RegisterComponent {
       let age = today.getFullYear() - birthDate.getFullYear();
       const monthDiff = today.getMonth() - birthDate.getMonth();
       if (
-        monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())
+        monthDiff < 0 ||
+        (monthDiff === 0 && today.getDate() < birthDate.getDate())
       ) {
         age--;
       }
