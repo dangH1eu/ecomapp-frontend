@@ -20,114 +20,41 @@
 
     </div>
     <div class="row">
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6" *ngFor="let product of products">
             <div class="product-item">
-                <img src="https://images.pexels.com/photos/20955062/pexels-photo-20955062/free-photo-of-woman-writing-on-black-keyboard-of-laptop.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                <img [src]="product.url"
                     alt="product-image" class="product-image">
-                <h3 class="product-name">Product test</h3>
-                <p class="product-description">oibuaoiurweoiru</p>
-                <p class="product-warranty">Warranty: 12 months</p>
-                <p class="product-price"><del>200$</del>$100</p>
-                <div class="product-rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <div class="product-actions">
-                    <button class="btn btn-primary">Add to cards</button>
-                    <button class="btn btn-success">Add to cards</button>
-                </div>
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-description">{{ product.description}}</p>
+                <p class="product-price">Price: ${{ product.price }}</p>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="product-item">
-                <img src="https://images.pexels.com/photos/20955062/pexels-photo-20955062/free-photo-of-woman-writing-on-black-keyboard-of-laptop.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                    alt="product-image" class="product-image">
-                <h3 class="product-name">Product test</h3>
-                <p class="product-description">oibuaoiurweoiru</p>
-                <p class="product-warranty">Warranty: 12 months</p>
-                <p class="product-price"><del>200$</del>$100</p>
-                <div class="product-rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <div class="product-actions">
-                    <button class="btn btn-primary">Add to cards</button>
-                    <button class="btn btn-success">Add to cards</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="product-item">
-                <img src="https://images.pexels.com/photos/20955062/pexels-photo-20955062/free-photo-of-woman-writing-on-black-keyboard-of-laptop.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                    alt="product-image" class="product-image">
-                <h3 class="product-name">Product test</h3>
-                <p class="product-description">oibuaoiurweoiru</p>
-                <p class="product-warranty">Warranty: 12 months</p>
-                <p class="product-price"><del>200$</del>$100</p>
-                <div class="product-rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <div class="product-actions">
-                    <button class="btn btn-primary">Add to cards</button>
-                    <button class="btn btn-success">Add to cards</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="product-item">
-                <img src="https://images.pexels.com/photos/20955062/pexels-photo-20955062/free-photo-of-woman-writing-on-black-keyboard-of-laptop.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                    alt="product-image" class="product-image">
-                <h3 class="product-name">Product test</h3>
-                <p class="product-description">oibuaoiurweoiru</p>
-                <p class="product-warranty">Warranty: 12 months</p>
-                <p class="product-price"><del>200$</del>$100</p>
-                <div class="product-rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <div class="product-actions">
-                    <button class="btn btn-primary">Add to cards</button>
-                    <button class="btn btn-success">Add to cards</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="product-item">
-                <img src="https://images.pexels.com/photos/20955062/pexels-photo-20955062/free-photo-of-woman-writing-on-black-keyboard-of-laptop.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                    alt="product-image" class="product-image">
-                <h3 class="product-name">Product test</h3>
-                <p class="product-description">oibuaoiurweoiru</p>
-                <p class="product-warranty">Warranty: 12 months</p>
-                <p class="product-price"><del>200$</del>$100</p>
-                <div class="product-rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <div class="product-actions">
-                    <button class="btn btn-primary">Add to cards</button>
-                    <button class="btn btn-success">Add to cards</button>
-                </div>
-            </div>
-        </div>
-
     </div>
 
+</div>
+<div class="d-flex justify-content-center">
+<nav>
+    <ul class="pagination">
+        <li class="page-item" *ngIf="currentPage > 1">
+            <a href="#" class="page-link" (click)="onPageChange(1)">First</a>
+        </li>
+        <li class="page-item" *ngIf="currentPage > 1">
+            <a href="#" class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>
+        </li>
+        <ng-container *ngFor="let page of visiblePages">
+            <li class="page-item" [ngClass]="{'active': page === currentPage}">
+                <a href="#" class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+            </li>
+        </ng-container>
+        <li class="page-item" *ngIf="currentPage < totalPages">
+            <a href="#" class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+        </li>
+        <li class="page-item" *ngIf="currentPage < totalPages">
+            <a href="#" class="page-link" (click)="onPageChange(totalPages)">Last</a>
+        </li>
+    </ul>
+</nav>
 
 </div>
+
 <app-footer></app-footer>
