@@ -16,4 +16,10 @@ export class OrderService {
   placeOrder(orderData: OrderDTO): Observable<any> {
     return this.http.post(this.apiUrl, orderData);
   }
+
+  getOrderById(orderId: number): Observable<any> {
+    const url = `${environment.apiBaseUrl}/orders/${orderId}`;
+    return this.http.get(url);
+  }
+
 }
