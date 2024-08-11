@@ -1,0 +1,36 @@
+.container-fluid {
+    background-color: white;
+    padding-left: 0 !important; 
+    padding-right: 0 !important; 
+}
+.header {
+    background-color: rgb(41, 50, 78);
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+button {
+    color: white;
+}
+.sidebar {
+    background-color: rgb(61, 75, 118) !important;
+    color: white; 
+    height: 100vh;
+    overflow-y: auto; 
+}
+
+.sidebar a {
+    color: white; /* Text color for links */
+    border-top: 1px solid #000; 
+    padding: 10px 15px; 
+}
+
+.sidebar a.active {
+    font-weight: bold; 
+}
+.sidebar a:hover {
+    background-color: #0056b3; 
+}
+.icon {
+    padding: 5px;
+}

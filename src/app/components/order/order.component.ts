@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { OrderDTO } from 'src/app/dto/order/order.dto';
 import { environment } from 'src/app/environment/environment';
+import { Order } from 'src/app/models/order';
 import { Product } from 'src/app/models/product';
 import { CartService } from 'src/app/service/cart.service';
 import { OrderService } from 'src/app/service/order.service';
 import { ProductService } from 'src/app/service/product.service';
+import { TokenService } from 'src/app/service/token.service';
 
 @Component({
   selector: 'app-order',
@@ -24,6 +27,7 @@ export class OrderComponent implements OnInit {
     email: '',
     phone_number: '',
     address: '',
+    status: 'pending',
     note: '',
     total_money: 0,
     shipping_method: 'express',
@@ -36,7 +40,10 @@ export class OrderComponent implements OnInit {
     private cartService: CartService,
     private productService: ProductService,
     private orderService: OrderService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private tokenService: TokenService,
+    private router: Router,
+    
   ) {
     this.orderForm = this.formBuilder.group({
       fullname: ['test name 4', Validators.required],
@@ -54,12 +61,19 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     debugger;
+    // this.cartService.clearCart();
+    this.orderData.user_id = this.tokenService.getUserId();    
+
     // retrieve product from cart
     const cart = this.cartService.getCart();
     // convert id from Map to array
     const productIds = Array.from(cart.keys());
 
-    debugger;
+    debugger
+    if(productIds.length === 0) {
+      return;
+    }
+
     this.productService.getProductsByIds(productIds).subscribe({
       next: (products) => {
         debugger;
@@ -108,11 +122,14 @@ export class OrderComponent implements OnInit {
         product_id: cartItem.product.id,
         quantity: cartItem.quantity,
       }));
+      this.orderData.total_money = this.totalAmount;
 
       this.orderService.placeOrder(this.orderData).subscribe({
-        next: (response) => {
+        next: (response: Order) => {
           debugger;
-          console.log('Order successfully');
+          alert('Order successfully')
+          this.cartService.clearCart();
+          this.router.navigate(['/']);
         },
         complete: () => {
           debugger;
@@ -120,7 +137,7 @@ export class OrderComponent implements OnInit {
         },
         error: (error: any) => {
           debugger;
-          console.error('Cannot create order: ', error);
+          alert(`Cannot create order: ${error}`);
         },
       });
     }

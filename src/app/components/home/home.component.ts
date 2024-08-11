@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit{
   products: Product[] = [];
   categories: Category[] = [];
   selectedCategoryId: number = 0;
-  currentPage: number = 1;
+  currentPage: number = 0;
   itemsPerPage: number = 12;
   pages: number[] = [];
   totalPages: number = 0;
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit{
   }
 
   searchProducts(){
-    this.currentPage = 1;
+    this.currentPage = 0;
     this.itemsPerPage = 12;
     debugger;
     this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
@@ -88,15 +88,16 @@ export class HomeComponent implements OnInit{
   generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
     const maxVisiblePages = 5;
     const halfVisiblePages = Math.floor(maxVisiblePages / 2);
-    let startPage = Math.max(currentPage - halfVisiblePages, 1);
+    let startPage = Math.max(currentPage - halfVisiblePages, 0);
     let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
 
     if(endPage - startPage + 1 < maxVisiblePages) {
-      startPage = Math.max(endPage - maxVisiblePages + 1, 1);
+      startPage = Math.max(endPage - maxVisiblePages + 1, 0);
     }
 
     return new Array(endPage - startPage + 1).fill(0).map((_, index) => startPage + index);
   }
+
   onProductClick(productId: number) {
     debugger
     this.router.navigate(['/products', productId]);

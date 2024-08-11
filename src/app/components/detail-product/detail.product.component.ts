@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/app/environment/environment';
 import { Product } from 'src/app/models/product';
 import { ProductImage } from 'src/app/models/product.image';
@@ -8,8 +8,8 @@ import { ProductService } from 'src/app/service/product.service';
 
 @Component({
   selector: 'app-detail-product',
-  templateUrl: './detail-product.component.html',
-  styleUrls: ['./detail-product.component.scss']
+  templateUrl: './detail.product.component.html',
+  styleUrls: ['./detail.product.component.scss']
 })
 export class DetailProductComponent implements OnInit {
   product?: Product;
@@ -20,11 +20,13 @@ export class DetailProductComponent implements OnInit {
     private productService: ProductService,
     private cartService: CartService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
   ){}
 
   ngOnInit() {
 
-    const idParam = 8
+    const idParam = this.activatedRoute.snapshot.paramMap.get('id');
+
     if(idParam !== null){
       this.productId = +idParam;
     }
